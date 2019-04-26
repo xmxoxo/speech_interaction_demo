@@ -9,7 +9,7 @@
 
 Python版本：Python3.6.2
 
-修改test_demo/config.py中的百度key/图灵key等参数
+修改配置文件： test_demo/RobotConfig.py 中的百度key/图灵key等参数
 
 然后执行 `python test_demo/main.py` 就可以用了
 
