@@ -136,8 +136,11 @@ def mobileApi (txt):
     
 #把评论情感转换成句子
 def mobile_answer(txt):
-    x = int(mobileApi(txt)) + 1
-    print(x)
+    if txt in self.config.Quit_words:
+        x = 3
+    else:
+        x = int(mobileApi(txt)) + 1
+        print(x)
     import random 
     emotions = [
                 #差评
@@ -150,7 +153,7 @@ def mobile_answer(txt):
 
                 #中评
                 ['您的评论情感是中性的',
-                '我们的产品还是有很多优点的，有待慢慢发现，嘻。',
+                '我们的产品还是有很多优点的，有待慢慢发现呢。',
                 '我们的产品还需要改进，嗯，我会努力的。',
                 '看来你还没发现我的优点，哈哈。',
 
@@ -160,6 +163,12 @@ def mobile_answer(txt):
                 ['谢谢亲的好评，嗯，我会加油的！么么哒',
                 '您的评论情感充满正能量！谢谢你',
                 '看你这么喜欢我们的产品，我的付出是值得的！',
+                ],
+                
+                #退出词回复
+                ['亲，您走好。',
+                '走好不送。',
+                '亲，你就这样走了么，我会想你的。',
                 ],
                ]
     intLen = len(emotions[x])
