@@ -98,7 +98,8 @@ class VoiceRobot():
             print('播放声音...')
             speak(tuling_answer_file)
             #playMp3 (tuling_answer_file)
-
+            
+            #判断退出词
             if input_message[0] in self.config.Quit_words:
                 break
         
@@ -118,6 +119,55 @@ def myanswer (x):
         #  random.randint(0,len(answer['list']))
     return text
 
+#手机评论API接口
+def mobileApi (txt):
+    pass
+    print("手机评论模型接口...")
+    
+    import requests
+    import json
+
+    url = 'http://192.168.15.111:8910/api/v0.1/query'
+    dt = {'text': txt}
+    res = requests.post(url, data=dt)
+    res.encoding = 'utf-8'
+    answer_message = json.loads(res.text)
+    return answer_message['result'][0][0]
+    
+#把评论情感转换成句子
+def mobile_answer(txt):
+    x = int(mobileApi(txt)) + 1
+    print(x)
+    import random 
+    emotions = [
+                #差评
+                ['呜~呜~呜~, 好伤心啊, 您的评价这么差么',
+                '东西真的有这么差么，你是猴子请来的救兵吗？',
+                '不喜欢也不要说得这么直白嘛！',
+                '好吧亲，我们会努力做得更好一点的！',
+                '亲，真不好意思，你要是不喜欢就换一个呗？',
+                ],
+
+                #中评
+                ['您的评论情感是中性的',
+                '我们的产品还是有很多优点的，有待慢慢发现，嘻。',
+                '我们的产品还需要改进，嗯，我会努力的。',
+                '看来你还没发现我的优点，哈哈。',
+
+                ],
+                
+                #好评
+                ['谢谢亲的好评，嗯，我会加油的！么么哒',
+                '您的评论情感充满正能量！谢谢你',
+                '看你这么喜欢我们的产品，我的付出是值得的！',
+                ],
+               ]
+    intLen = len(emotions[x])
+    intIndex = random.randint(0,intLen-1)
+    return emotions[x][intIndex]
+
+    
+
 if __name__ == '__main__': 
     #config = RobotConfig()
     robot = VoiceRobot(RobotConfig())
@@ -125,7 +175,16 @@ if __name__ == '__main__':
 
     #指定回答接口
     print('正在指定回复接口...')
-    robot.answer = myanswer
+    #robot.answer = myanswer
+    robot.answer = mobile_answer
 
     #运行机器人
     robot.run()
+
+    '''
+    txt = mobile_answer("物流实在不敢恭维，手机电池也太容易没电了。")
+    txt = mobile_answer("物流实在不错，手机电池也很耐用呢。")
+    print(txt)
+    robot.t2v (txt, RobotConfig.tuling_answer_file)
+    speak(RobotConfig.tuling_answer_file)
+    '''
