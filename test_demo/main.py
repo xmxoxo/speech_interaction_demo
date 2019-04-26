@@ -103,8 +103,8 @@ class VoiceRobot():
             if input_message[0] in self.config.Quit_words:
                 break
         
-        #删除临时文件, 在这里删除好象删除不了
-        #self.del_tmpfile()
+        #删除临时文件, 在这里删除好象有些文件删除不了
+        self.del_tmpfile()
 
 
 def myanswer (x):
