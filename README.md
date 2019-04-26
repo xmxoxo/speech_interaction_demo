@@ -1,9 +1,30 @@
-# speech_interaction_demo
-```
-在windows10上运行的内容。
-Python版本：Python3.6.2。
-修改test_demo/main.py中的百度key/图灵key，就可以用。
-```
+﻿# speech_interaction_demo
+
+简单的语音对话机器人框架
+
+## 使用说明
+
+
+在windows 7上运行通过
+
+Python版本：Python3.6.2
+
+修改test_demo/config.py中的百度key/图灵key等参数
+
+然后执行 `python test_demo/main.py` 就可以用了
+
+## 更新内容
+
+* 修改了文件结构，把配置文件独立出来；
+
+* 修改了运行方式，对话可以一直进行，直到说出“再见”，“拜拜”等自动退出对话。
+
+* 可以指定对话函数，方便与各自的项目对接，默认为Echo方法，也就是重复你说的内容。
+
+* 增加了提示语，每次对话前会播放提示语。
+  
+
+
 
 #### 整体的实现流程
 

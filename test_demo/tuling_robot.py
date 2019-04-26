@@ -1,20 +1,19 @@
-# -*- coding: utf-8 -*-
-# @Time     :2018/9/4
-# @Author   :qpf
+#!/usr/bin/env python3
+#coding:utf-8
 
-
-"""
-获取对话的内容
-"""
+__author__ = 'xmxoxo<xmxoxo@qq.com>'
 
 import requests
 import json
 
 
 def answer(message, key):
-    url = 'http://www.tuling123.com/openapi/api?key='+key+'&info='+message
+    url = 'http://www.tuling123.com/openapi/api?key=' + key + '&info=' + message
     res = requests.get(url)
     res.encoding = 'utf-8'
     answer_message = json.loads(res.text)
-
     return answer_message
+
+if __name__ == '__main__':
+    pass
+
